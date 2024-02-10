@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Fazer uma tabela de banco de dados, eliminando a necessidade de escrever consultas SQL manualmente.
+// https://www.prisma.io/docs/getting-started/quickstart
+
+// ORM PARA GERENCIAR O BANCO DE DADOS 
+// - npm install prisma --save-dev
+
+// USAR UM postgresql COMO BANCO DE DADOS 
+// - npx prisma init --datasource-provider postgresql
+
+// 
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id      String    @id @default(cuid())
+  name    String
+  booking Booking[]
+}
+
+model Barbershop {
+  id       String    @id @default(uuid())
+  name     String
+  address  String
+  imageUrl String
+  service  Service[]
+  booking  Booking[]
+}
+
+model Service {
+  id           String     @id @default(uuid())
+  name         String
+  price        Decimal    @db.Decimal(10, 2)
+  barbershopId String
+  barbershop   Barbershop @relation(fields: [barbershopId], references: [id])
+  description  String
+  booking      Booking[]
+}
+
+model Booking {
+  id           String     @id @default(uuid())
+  userId       String
+  user         User       @relation(fields: [userId], references: [id])
+  serviceId    String
+  service      Service    @relation(fields: [serviceId], references: [id])
+  barbershopId String
+  barbershop   Barbershop @relation(fields: [barbershopId], references: [id])
+  date         DateTime
+}
+
+
+// npx prisma format 
+// FAZ ALGUMAS FORMATAÇÕES DEPOIS DE JA ESCRITO O CODIGO PRISMA
