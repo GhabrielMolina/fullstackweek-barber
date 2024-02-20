@@ -24,7 +24,7 @@ export { handler as GET, handler as POST }
 // Desta mesma página copiar codigo para o schema.prisma
 // Fazer uma migration npx prisma migrate dev --name add_user_tables
 
-// Acessar Google Developer Console
+// Acessar https://console.cloud.google.com/
 // Criar um projeto
 // ir em APIs e serviços > Credenciais
 // Criar Credenciais > Id do Cliente OAuth
@@ -36,3 +36,4 @@ export { handler as GET, handler as POST }
 // Copiar Id Do Cliente / Chave secreta do cliente > colocar no .env
 
 // Codar arquivo route.ts no mesmo modelo
+// Criar pasta /app/_providers/auth.tsx e codar no mesmo modelo
