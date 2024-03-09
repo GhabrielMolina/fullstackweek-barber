@@ -27,7 +27,7 @@ interface ServiceItemProps {
 }
 
 const ServiceItem = ({ service, barbershop, isAuthenticated }: ServiceItemProps) => {
-  const rourer = useRouter()
+  const router = useRouter()
   const { data } = useSession()
 
   const [date, setDate] = useState<Date | undefined>(undefined)
@@ -82,7 +82,7 @@ const ServiceItem = ({ service, barbershop, isAuthenticated }: ServiceItemProps)
         description: format(newDate, "'Para' dd 'de' MMMM 'às' HH':'mm'.", {locale: ptBR}),
         action: {
           label: "Visualizar",
-          onClick: () => Router.push("/bookings"),
+          onClick: () => router.push("/bookings"),
         },
       })
     } catch (error) {
