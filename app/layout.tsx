@@ -25,7 +25,6 @@ export default function RootLayout({
           {children}
           <Toaster />
           <Footer />
-
         </AuthProvider>
       </body>
     </html>
