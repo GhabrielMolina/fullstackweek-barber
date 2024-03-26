@@ -45,14 +45,14 @@ const ServiceItem = ({ service, barbershop, isAuthenticated }: ServiceItemProps)
     }
 
     const refreshAvailableHours = async () => {
-      const _dayBookings = await getDayBookings(date);
+      const _dayBookings = await getDayBookings(barbershop.id, date);
 
       setDayBookings(_dayBookings);
     };
 
     // Sempre que a Date mudar, vai executar a função
     refreshAvailableHours();
-  }, [date]);
+  }, [date, barbershop.id]);
 
   // Quado seleciona outra data, reseta os horários selecionados
   const handleDateClick = (date: Date | undefined) => {
