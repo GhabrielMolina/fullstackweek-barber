@@ -11,13 +11,39 @@ import { format } from 'date-fns'
 import Header from "../_components/header";
 import { ptBR } from 'date-fns/locale/pt-BR';
 import Search from './_components/search';
-import BookingItem from '../_components/booking-item';
 import { db } from '../_lib/prisma';
 import BarbershopItem from './_components/barbershop-item';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../api/auth/[...nextauth]/route';
+import BookingItem from '../_components/booking-item';
 
 export default async function Home() {
-  // Chamar prisma e pegar barbearias (Com '../_lib/prisma' configurado)
-  const barbershops = await db.barbershop.findMany({});
+  // Recuperar a sessão do usuário (ver se ele esta logado ou não)
+  const session = await getServerSession(authOptions)
+
+  // Promise.all == executar as duas promessas ao mesmo tempo
+  const [barbershops, confirmedBookings] = await Promise.all([
+    // Chamar prisma e pegar barbearias (Com '../_lib/prisma' configurado)
+    db.barbershop.findMany({}),
+
+    session?.user ? db.booking.findMany({
+      // Achar todos os agendamentos que tenham userId igual ao id do usuário logado
+      where: {
+        userId: (session.user as any).id,
+        // Filtrar os agendamentos que são futuros e os que são futuros
+        date: {
+          // No banco de dados -> gte = Maior ou igual que
+          gte: new Date()
+        }
+      },
+  
+      // Para poder colocar o nome do serviço do schema do prisma (service) no BookingItem
+      include: {
+        service: true,
+        barbershop: true,
+      },
+    }) : Promise.resolve([])
+  ])
 
   return (
     <div>
@@ -36,10 +62,14 @@ export default async function Home() {
         <Search />
       </div>
 
-      {/* <div className='px-5 mt-6'>
-        <h2 className='text-xs mb-3 uppercase text-gray-400 font-bold'>Agendamentos</h2>
-          <BookingItem />
-      </div> */}
+      <div className='mt-6'>
+        <h2 className='text-xs mb-3 pl-5 uppercase text-gray-400 font-bold'>Agendamentos</h2>
+
+        <div className='px-5 flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden'>
+          {confirmedBookings.map(booking => <BookingItem key={booking.id} booking={booking} />)}
+        </div>
+
+      </div>
 
       <div className='mt-6'>
         <h2 className='text-xs mb-3 px-5 uppercase text-gray-400 font-bold'>Recomendados</h2>

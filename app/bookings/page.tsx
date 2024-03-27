@@ -16,23 +16,45 @@ const BookingsPage = async () => {
     return redirect('/')
   }
 
-  const bookings = await db.booking.findMany({
-    // Achar todos os agendamentos que tenham userId igual ao id do usuário logado
-    where: {
-      userId: (session.user as any).id
-    },
+  // Promise.all == executar as duas promessas ao mesmo tempo
+  const [confirmedBookings, finishedBooking] = await Promise.all([
+    db.booking.findMany({
+      // Achar todos os agendamentos que tenham userId igual ao id do usuário logado
+      where: {
+        userId: (session.user as any).id,
+        // Filtrar os agendamentos que são futuros e os que são futuros
+        date: {
+          // No banco de dados -> gte = Maior ou igual que
+          gte: new Date()
+        }
+      },
 
-    // Para poder colocar o nome do serviço do schema do prisma (service) no BookingItem
-    include: {
-      service: true,
-      barbershop: true,
-    },
-  })
+      // Para poder colocar o nome do serviço do schema do prisma (service) no BookingItem
+      include: {
+        service: true,
+        barbershop: true,
+      },
+    }),
 
-  // Filtrar os agendamentos que são futuros e os que são passados
-  const confimedBookings = bookings.filter(booking => isFuture(booking.date))
-  const finishedBooking = bookings.filter(booking => isPast(booking.date))
+    db.booking.findMany({
+      // Achar todos os agendamentos que tenham userId igual ao id do usuário logado
+      where: {
+        userId: (session.user as any).id,
+        // Filtrar os agendamentos que são futuros e os que são passados
+        date: {
+          // No banco de dados -> lt = menor que
+          lt: new Date()
+        }
+      },
 
+      // Para poder colocar o nome do serviço do schema do prisma (service) no BookingItem
+      include: {
+        service: true,
+        barbershop: true,
+      },
+    })
+
+  ])
   return (
     <>
       <Header />
@@ -43,7 +65,7 @@ const BookingsPage = async () => {
         <h2 className="text-gray-400 font-bold uppercase text-sm mt-6 mb-3">Confirmados</h2>
 
         <div className="flex flex-col gap-3">
-          {confimedBookings.map((booking) => (
+          {confirmedBookings.map((booking) => (
             <BookingItem key={booking.id} booking={booking} />
           ))}
         </div>
