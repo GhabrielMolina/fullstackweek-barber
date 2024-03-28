@@ -14,8 +14,8 @@ import Search from './_components/search';
 import { db } from '../_lib/prisma';
 import BarbershopItem from './_components/barbershop-item';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../api/auth/[...nextauth]/route';
 import BookingItem from '../_components/booking-item';
+import { authOptions } from '../_lib/auth';
 
 export default async function Home() {
   // Recuperar a sessão do usuário (ver se ele esta logado ou não)
@@ -50,7 +50,7 @@ export default async function Home() {
       <Header />
 
       <div className='px-5 pt-5'>
-        <h2 className='text-xl font-bold'>Olá, Miguel</h2>
+        <h2 className='text-xl font-bold'>{session?.user ? `Olá, ${session.user.name?.split(" ")[0]}` : 'Olá! Vamos agendar um corte hoje?'}</h2>
         <p className='capitalize text-sm'>
           {format(new Date(), "EEEE',' dd 'de' MMMM", {
             locale: ptBR,
