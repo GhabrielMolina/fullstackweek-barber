@@ -36,7 +36,7 @@ export default async function Home() {
           gte: new Date()
         }
       },
-  
+
       // Para poder colocar o nome do serviço do schema do prisma (service) no BookingItem
       include: {
         service: true,
@@ -63,11 +63,15 @@ export default async function Home() {
       </div>
 
       <div className='mt-6'>
-        <h2 className='text-xs mb-3 pl-5 uppercase text-gray-400 font-bold'>Agendamentos</h2>
+        {confirmedBookings.length > 0 && (
+          <>
+            <h2 className='text-xs mb-3 pl-5 uppercase text-gray-400 font-bold'>Agendamentos</h2>
 
-        <div className='px-5 flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden'>
-          {confirmedBookings.map(booking => <BookingItem key={booking.id} booking={booking} />)}
-        </div>
+            <div className='px-5 flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden'>
+              {confirmedBookings.map(booking => <BookingItem key={booking.id} booking={booking} />)}
+            </div>
+          </>
+        )}
 
       </div>
 
