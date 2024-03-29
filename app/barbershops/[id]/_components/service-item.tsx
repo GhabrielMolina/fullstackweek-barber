@@ -11,7 +11,7 @@ import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { generateDayTimeList } from "../_halpers/hours";
-import { format, setHours, setMinutes } from "date-fns";
+import { addDays, format, setHours, setMinutes } from "date-fns";
 import { saveBooking } from "../_actions/save-booking";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -177,7 +177,7 @@ const ServiceItem = ({ service, barbershop, isAuthenticated }: ServiceItemProps)
                       onSelect={handleDateClick}
                       locale={ptBR}
                       // Data minima, a de hoje
-                      fromDate={new Date()}
+                      fromDate={addDays(new Date(), 1)}
                       // https://react-day-picker.js.org/basics/customization
                       styles={{
                         head_cell: {

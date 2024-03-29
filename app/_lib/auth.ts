@@ -28,3 +28,6 @@ export const authOptions: AuthOptions = {
   },
   secret: process.env.NEXT_AUTH_SECRET,
 }
+
+// Processo de Auth, adcionar em https://console.cloud.google.com/apis/credentials/oauthclient
+// A URL de hospedagem da Vercel
