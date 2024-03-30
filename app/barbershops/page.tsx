@@ -1,10 +1,16 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 import { redirect } from "next/navigation";
 import BarbershopItem from "../(home)/_components/barbershop-item";
 import Header from "../_components/header";
 import { db } from "../_lib/prisma";
 import Search from "../(home)/_components/search";
+=======
+import BarbershopItem from "../(home)/_components/barbershop-item";
+import Header from "../_components/header";
+import { db } from "../_lib/prisma";
+>>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f
 =======
 import BarbershopItem from "../(home)/_components/barbershop-item";
 import Header from "../_components/header";
@@ -21,11 +27,15 @@ interface BarbershopsPagePros {
 // Pelo campo de pesquisa no seguinte link 'http://localhost:3000/barbershops?search=vintage'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const BarbershopsPage = async ({ searchParams }: BarbershopsPagePros) => {
   if (!searchParams.search) {
     return redirect("/"); // Redireciona para a página inicial caso não tenha nada no campo de pesquisa
   }
 
+=======
+const BarbershopsPage = async ({searchParams} : BarbershopsPagePros) => {
+>>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f
 =======
 const BarbershopsPage = async ({searchParams} : BarbershopsPagePros) => {
 >>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f
@@ -43,6 +53,7 @@ const BarbershopsPage = async ({searchParams} : BarbershopsPagePros) => {
       <Header />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       <div className="px-5 py-6 flex flex-col gap-6">
         <Search defaultValues={{
           search: searchParams.search,
@@ -57,6 +68,8 @@ const BarbershopsPage = async ({searchParams} : BarbershopsPagePros) => {
             </div>
           ))}
 =======
+=======
+>>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f
       <div className="px-5 py-6">
         <h1 className="text-gray-400 text-xs font-bold uppercase">Resultados para "{searchParams.search}"</h1>
 
@@ -66,6 +79,9 @@ const BarbershopsPage = async ({searchParams} : BarbershopsPagePros) => {
               <BarbershopItem  barbershop={barbershop} />
             </div>
           ))}  
+<<<<<<< HEAD
+>>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f
+=======
 >>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f
         </div>
       </div>
@@ -73,7 +89,11 @@ const BarbershopsPage = async ({searchParams} : BarbershopsPagePros) => {
   )
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f
 =======
  
 >>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f

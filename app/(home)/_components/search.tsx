@@ -13,6 +13,7 @@ import { SearchIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 import { z } from "zod";
 import { useRouter } from "next/navigation";
@@ -65,6 +66,8 @@ const Search = ({defaultValues} : SearchProps) => {
 }
 
 =======
+=======
+>>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f
 
 import { z } from "zod";
 import { useRouter } from "next/navigation";
@@ -111,5 +114,8 @@ const Search = () => {
   );
 }
 
+<<<<<<< HEAD
+>>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f
+=======
 >>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f
 export default Search;
