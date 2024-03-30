@@ -12,8 +12,6 @@ import { Input } from "@/app/_components/ui/input";
 import { SearchIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 import { z } from "zod";
 import { useRouter } from "next/navigation";
@@ -65,57 +63,4 @@ const Search = ({defaultValues} : SearchProps) => {
   );
 }
 
-=======
-=======
->>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f
-
-import { z } from "zod";
-import { useRouter } from "next/navigation";
-
-const formSchema = z.object({
-  search: z.string({ required_error: "Campo Obrigatório." }).trim().min(1, "Campo Obrigatório."),
-})
-
-const Search = () => {
-  const router = useRouter();
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-  })
-
-  const handleSubmit = (data: z.infer<typeof formSchema>) => {
-    router.push(`/barbershops?search=${data.search}`);
-  }
-
-  return (
-    <div className="flex items-center gap-2">
-      <Form {...form}>
-        <form className="flex w-full gap-4" onSubmit={form.handleSubmit(handleSubmit)}>
-          <FormField
-            control={form.control}
-            name="search"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <Input placeholder="Busque por uma barbearia..." {...field} />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button variant="default" type="submit">
-            <SearchIcon size={20} />
-          </Button>
-        </form>
-      </Form>
-    </div>
-  );
-}
-
-<<<<<<< HEAD
->>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f
-=======
->>>>>>> 64afae752fdb92dbc4ce6e5a45fb8d574eddb05f
 export default Search;
