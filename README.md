@@ -95,11 +95,7 @@ pnpm dev
 
 <br />
 
-<<<<<<< HEAD
 Developed with 🧡 by <strong>Ghabriel Molina</strong>
-=======
-Developed with 🧡 by <strong>Cristian Sbardelotto</strong>
->>>>>>> e3c35f63ee7b641cc283545307f9af09c16319ef
 
 <br />
 
