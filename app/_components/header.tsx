@@ -13,31 +13,30 @@ import Link from 'next/link';
 
 // Digitar sfc para criar o molde de componente
 const Header = () => {
+  return (
+    <header>
+      <Card>
+        <CardContent className='p-5 flex flex-row justify-between items-center'>
+          <Link href='/'>
+            <Image src='/logo.png' alt='FSW Barber' height={22} width={120} />
+          </Link>
 
-    
+          <Sheet>
+            {/**asChild == esse Button que vai ser o Trigger e abrir o Sheet */}
+            <SheetTrigger asChild>
+              <Button variant='outline' size='icon'>
+                <MenuIcon size={16} />
+              </Button>
+            </SheetTrigger>
 
-    return ( 
-        <Card>
-            <CardContent className='p-5 flex flex-row justify-between items-center'>
-                <Link href='/'>
-                    <Image src='/logo.png' alt='FSW Barber' height={22} width={120} />
-                </Link>
-                                   
-                <Sheet>
-                {/**asChild == esse Button que vai ser o Trigger e abrir o Sheet */} 
-                    <SheetTrigger asChild> 
-                        <Button variant='outline' size='icon'>
-                            <MenuIcon size={16} />
-                        </Button> 
-                    </SheetTrigger>
-
-                    <SheetContent className='p-0'> 
-                        <SideMenu />
-                    </SheetContent>
-                </Sheet>
-            </CardContent>
-        </Card>
-     );
+            <SheetContent className='p-0'>
+              <SideMenu />
+            </SheetContent>
+          </Sheet>
+        </CardContent>
+      </Card>
+    </header>
+  );
 }
 
 // https://ui.shadcn.com/docs/components/sheet
